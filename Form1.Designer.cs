@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
@@ -33,7 +34,7 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 300);
+            this.ClientSize = new System.Drawing.Size(500, 400);
             this.Text = "Form1";
 
             lRED = new Label();
@@ -94,6 +95,39 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
             panel.BorderStyle = BorderStyle.FixedSingle;
             panel.BackColor = Color.GhostWhite;
             this.Controls.Add(panel);
+
+            btnSave = new Button();
+            btnSave.Text = "Save";
+            btnSave.Size = new Size(120, 30);
+            btnSave.Location = new Point(360, 300);
+            this.Controls.Add(btnSave);
+            btnSave.Click += BtnSave_Click;
+
+
+            savedColors = new ComboBox();
+            savedColors.Size = new Size(300, 30);
+            savedColors.Location = new Point(50, 300);
+            //savedColors.SelectedIndex = 0;
+            savedColors.SelectedIndexChanged += SavedColors_SelectedIndexChanged;
+            this.Controls.Add(savedColors);
+        }
+
+        private void SavedColors_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (savedColors.SelectedIndex >= 0)
+            {
+                string [] colors = savedColors.SelectedItem.ToString().Split(',');
+                trBarRED.Value = (Convert.ToInt32(colors[0]));
+                trBarGREEN.Value = (Convert.ToInt32(colors[1]));
+                trBarBLUE.Value = (Convert.ToInt32(colors[2]));
+
+
+            }
+        }
+
+        private void BtnSave_Click(object sender, System.EventArgs e)
+        {
+            savedColors.Items.Add($"{trBarRED.Value},{trBarGREEN.Value},{trBarBLUE.Value}");
         }
 
         Label lRED;
@@ -103,6 +137,12 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
         TrackBar trBarRED;
         TrackBar trBarBLUE;
         TrackBar trBarGREEN;
+
+        Button btnSave;
+
+        ComboBox savedColors;
+
+        CheckBox day;
 
         Panel panel;
         #endregion
