@@ -97,7 +97,9 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
             this.Controls.Add(panel);
 
             btnSave = new Button();
-            btnSave.Text = "Save";
+            //btnSave.Text = "Save";
+            btnSave.BackgroundImage =  Image.FromFile("C:\\Users\\User\\OneDrive\\Documents\\GitHub\\Lesson 15.04.23 (ComboBox, ListBox, CheckListBox, ScrollBarr)\\Properties\\Image.png");
+            btnSave.BackgroundImageLayout = ImageLayout.Center;
             btnSave.Size = new Size(120, 30);
             btnSave.Location = new Point(360, 300);
             this.Controls.Add(btnSave);
