@@ -110,6 +110,14 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
             //savedColors.SelectedIndex = 0;
             savedColors.SelectedIndexChanged += SavedColors_SelectedIndexChanged;
             this.Controls.Add(savedColors);
+
+            day = new CheckBox();
+            day.Checked = true;
+            day.Text = "Set day or night theme";
+            day.Size = new Size(day.Text.Length * 12, 30);
+            day.Location = new Point(50, 320);
+            this.Controls.Add(day);
+            day.Click += Day_Click;
         }
 
         private void SavedColors_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -120,8 +128,26 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
                 trBarRED.Value = (Convert.ToInt32(colors[0]));
                 trBarGREEN.Value = (Convert.ToInt32(colors[1]));
                 trBarBLUE.Value = (Convert.ToInt32(colors[2]));
+            }
+        }
 
-
+        private void Day_Click(object sender, EventArgs e)
+        {
+            if (!day.Checked)
+            {
+                this.BackColor = Color.Black;
+                this.ForeColor = Color.White;
+                lGREEN.ForeColor = Color.White;
+                lBLUE.ForeColor = Color.White;
+                lRED.ForeColor = Color.White;
+            }
+            else
+            {
+                this.BackColor = Color.White;
+                this.ForeColor = Color.Black;
+                lGREEN.ForeColor = Color.Black;
+                lBLUE.ForeColor = Color.Black;
+                lRED.ForeColor = Color.Black;
             }
         }
 
