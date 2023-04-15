@@ -50,7 +50,7 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
             trBarRED.Location = new Point(50, 40);
             trBarRED.TickStyle = TickStyle.Both;
             trBarRED.TickFrequency = 10;
-            trBarRED.ValueChanged += (s, e) => this.Text = trBarRED.Value.ToString();
+            trBarRED.ValueChanged += (s, e) => panel.BackColor = Color.FromArgb(trBarRED.Value, trBarGREEN.Value, trBarBLUE.Value);
             this.Controls.Add(trBarRED);
 
             lGREEN = new Label();
@@ -67,7 +67,7 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
             trBarGREEN.Location = new Point(50, 130);
             trBarGREEN.TickStyle = TickStyle.Both;
             trBarGREEN.TickFrequency = 10;
-            trBarGREEN.ValueChanged += (s, e) => this.Text = trBarGREEN.Value.ToString();
+            trBarGREEN.ValueChanged += (s, e) =>  panel.BackColor = Color.FromArgb(trBarRED.Value, trBarGREEN.Value, trBarBLUE.Value);
             this.Controls.Add(trBarGREEN);
 
             lBLUE = new Label();
@@ -84,7 +84,7 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
             trBarBLUE.Location = new Point(50, 220);
             trBarBLUE.TickStyle = TickStyle.Both;
             trBarBLUE.TickFrequency = 10;
-            //trBarBLUE.ValueChanged += (s, e) => this.Text = panel.BackColor = Color.FromArgb();
+            trBarBLUE.ValueChanged += (s, e) => panel.BackColor = Color.FromArgb(trBarRED.Value, trBarGREEN.Value, trBarBLUE.Value);
             this.Controls.Add(trBarBLUE);
 
             panel = new Panel();
