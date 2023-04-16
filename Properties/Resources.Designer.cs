@@ -34,6 +34,8 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_.Proper
         {
         }
 
+        public static object Image { get; internal set; }
+
         /// <summary>
         ///   Возврат кэшированного экземпляра ResourceManager, используемого этим классом.
         /// </summary>

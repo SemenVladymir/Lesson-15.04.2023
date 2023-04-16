@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
@@ -33,7 +34,7 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 300);
+            this.ClientSize = new System.Drawing.Size(500, 400);
             this.Text = "Form1";
 
             lRED = new Label();
@@ -50,7 +51,7 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
             trBarRED.Location = new Point(50, 40);
             trBarRED.TickStyle = TickStyle.Both;
             trBarRED.TickFrequency = 10;
-            trBarRED.ValueChanged += (s, e) => this.Text = trBarRED.Value.ToString();
+            trBarRED.ValueChanged += (s, e) => panel.BackColor = Color.FromArgb(trBarRED.Value, trBarGREEN.Value, trBarBLUE.Value);
             this.Controls.Add(trBarRED);
 
             lGREEN = new Label();
@@ -67,7 +68,7 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
             trBarGREEN.Location = new Point(50, 130);
             trBarGREEN.TickStyle = TickStyle.Both;
             trBarGREEN.TickFrequency = 10;
-            trBarGREEN.ValueChanged += (s, e) => this.Text = trBarGREEN.Value.ToString();
+            trBarGREEN.ValueChanged += (s, e) =>  panel.BackColor = Color.FromArgb(trBarRED.Value, trBarGREEN.Value, trBarBLUE.Value);
             this.Controls.Add(trBarGREEN);
 
             lBLUE = new Label();
@@ -84,7 +85,7 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
             trBarBLUE.Location = new Point(50, 220);
             trBarBLUE.TickStyle = TickStyle.Both;
             trBarBLUE.TickFrequency = 10;
-            //trBarBLUE.ValueChanged += (s, e) => this.Text = panel.BackColor = Color.FromArgb();
+            trBarBLUE.ValueChanged += (s, e) => panel.BackColor = Color.FromArgb(trBarRED.Value, trBarGREEN.Value, trBarBLUE.Value);
             this.Controls.Add(trBarBLUE);
 
             panel = new Panel();
@@ -94,6 +95,67 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
             panel.BorderStyle = BorderStyle.FixedSingle;
             panel.BackColor = Color.GhostWhite;
             this.Controls.Add(panel);
+
+            btnSave = new Button();
+            //btnSave.Text = "Save";
+            btnSave.BackgroundImage =  Image.FromFile("C:\\Users\\User\\OneDrive\\Documents\\GitHub\\Lesson 15.04.23 (ComboBox, ListBox, CheckListBox, ScrollBarr)\\Properties\\Image.png");
+            btnSave.BackgroundImageLayout = ImageLayout.Center;
+            btnSave.Size = new Size(120, 30);
+            btnSave.Location = new Point(360, 300);
+            this.Controls.Add(btnSave);
+            btnSave.Click += BtnSave_Click;
+
+
+            savedColors = new ComboBox();
+            savedColors.Size = new Size(300, 30);
+            savedColors.Location = new Point(50, 300);
+            //savedColors.SelectedIndex = 0;
+            savedColors.SelectedIndexChanged += SavedColors_SelectedIndexChanged;
+            this.Controls.Add(savedColors);
+
+            day = new CheckBox();
+            day.Checked = true;
+            day.Text = "Set day or night theme";
+            day.Size = new Size(day.Text.Length * 12, 30);
+            day.Location = new Point(50, 320);
+            this.Controls.Add(day);
+            day.Click += Day_Click;
+        }
+
+        private void SavedColors_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (savedColors.SelectedIndex >= 0)
+            {
+                string [] colors = savedColors.SelectedItem.ToString().Split(',');
+                trBarRED.Value = (Convert.ToInt32(colors[0]));
+                trBarGREEN.Value = (Convert.ToInt32(colors[1]));
+                trBarBLUE.Value = (Convert.ToInt32(colors[2]));
+            }
+        }
+
+        private void Day_Click(object sender, EventArgs e)
+        {
+            if (!day.Checked)
+            {
+                this.BackColor = Color.Black;
+                this.ForeColor = Color.White;
+                lGREEN.ForeColor = Color.White;
+                lBLUE.ForeColor = Color.White;
+                lRED.ForeColor = Color.White;
+            }
+            else
+            {
+                this.BackColor = Color.White;
+                this.ForeColor = Color.Black;
+                lGREEN.ForeColor = Color.Black;
+                lBLUE.ForeColor = Color.Black;
+                lRED.ForeColor = Color.Black;
+            }
+        }
+
+        private void BtnSave_Click(object sender, System.EventArgs e)
+        {
+            savedColors.Items.Add($"{trBarRED.Value},{trBarGREEN.Value},{trBarBLUE.Value}");
         }
 
         Label lRED;
@@ -103,6 +165,12 @@ namespace Lesson_15._04._23__ComboBox__ListBox__CheckListBox__ScrollBarr_
         TrackBar trBarRED;
         TrackBar trBarBLUE;
         TrackBar trBarGREEN;
+
+        Button btnSave;
+
+        ComboBox savedColors;
+
+        CheckBox day;
 
         Panel panel;
         #endregion
